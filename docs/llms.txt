@@ -1,0 +1,30 @@
+# veridigit
+
+> Verified validation of structured identifiers (IBAN, payment cards, ISBN-13, VIN) for AI
+> agents. Runs the real checksum algorithms instead of letting a model guess. Ships as an
+> MCP server and a typed TypeScript library. By Qiniso — verified, trustworthy data tools
+> for AI agents.
+
+## What it does
+- validate_iban: ISO 7064 mod-97 checksum + country-specific length (75+ countries).
+- validate_card: Luhn (ISO/IEC 7812) checksum, brand detection from BIN, length rules.
+- validate_isbn: ISBN-13 (978/979 prefix + mod-10 weighted check digit).
+- validate_vin: ISO 3779 alphabet (no I/O/Q) + position-9 transliteration check digit.
+
+## Why
+On arbitrary (non-memorised) identifiers, a frontier LLM with no tool answered check-digit
+questions wrong ~91% of the time, and silently — confident, well-formatted, wrong.
+veridigit is correct 100% of the time because it runs the algorithm.
+
+## Scope
+Validates the STRUCTURE (format + checksum) of an identifier. Does NOT confirm a real,
+active, or owned account/card/book/vehicle. No network calls.
+
+## Install
+- MCP: npx -y veridigit  (tools: validate_iban, validate_card, validate_isbn, validate_vin)
+- Library: npm install veridigit
+
+## Links
+- Repo: https://github.com/qinisolabs/veridigit
+- npm: https://www.npmjs.com/package/veridigit
+- License: Apache-2.0

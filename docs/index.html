@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>veridigit — verified identifier validation for AI agents</title>
+<meta name="description" content="Verified IBAN, card, ISBN-13 & VIN validation for AI agents — checksums, not guesses. MCP server + TypeScript library by Qiniso.">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<style>
+  :root{
+    --emerald:#10b981; --emerald-dark:#047857; --ink:#0b1220; --muted:#5b6473;
+    --bg:#f7faf9; --card:#ffffff; --line:#e3eae7; --code:#0e1726;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       color:var(--ink);background:var(--bg);line-height:1.55}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px}
+  header{padding:64px 0 28px;text-align:center}
+  .logo{width:84px;height:84px;border-radius:22px;box-shadow:0 8px 28px rgba(4,120,87,.28)}
+  h1{font-size:2.6rem;margin:.5rem 0 .2rem;letter-spacing:-.02em}
+  .tag{font-size:1.18rem;color:var(--muted);margin:0 auto;max-width:36ch}
+  .by{margin-top:10px;font-size:.92rem;color:var(--muted)}
+  .by a{color:var(--emerald-dark);text-decoration:none;font-weight:600}
+  .cta{margin-top:22px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:600;text-decoration:none;font-size:.98rem}
+  .btn.primary{background:var(--emerald-dark);color:#fff}
+  .btn.ghost{background:#fff;color:var(--emerald-dark);border:1px solid var(--line)}
+  section{margin:40px 0}
+  h2{font-size:1.35rem;letter-spacing:-.01em;margin:0 0 14px}
+  .lead{color:var(--muted);max-width:62ch}
+  .bench{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 1px 0 rgba(0,0,0,.02)}
+  .headline{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-end;margin-bottom:20px}
+  .stat{flex:1;min-width:160px}
+  .stat .num{font-size:3rem;font-weight:800;line-height:1}
+  .stat.bad .num{color:#c0392b}
+  .stat.good .num{color:var(--emerald-dark)}
+  .stat .lbl{color:var(--muted);font-size:.95rem;margin-top:6px}
+  table{width:100%;border-collapse:collapse;margin-top:8px}
+  th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);font-size:.96rem}
+  th{color:var(--muted);font-weight:600}
+  .bar{height:9px;border-radius:5px;background:#eef2f1;overflow:hidden;min-width:120px}
+  .bar > span{display:block;height:100%;background:#c0392b}
+  td.r{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+  .note{font-size:.85rem;color:var(--muted);margin-top:14px}
+  pre{background:var(--code);color:#e6edf3;border-radius:12px;padding:16px 18px;overflow:auto;font-size:.88rem;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .tool{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .tool code{color:var(--emerald-dark);font-weight:700}
+  .tool p{margin:.4rem 0 0;color:var(--muted);font-size:.92rem}
+  footer{margin:56px 0 40px;color:var(--muted);font-size:.88rem;text-align:center}
+  footer a{color:var(--emerald-dark);text-decoration:none}
+  @media(max-width:620px){.grid{grid-template-columns:1fr}h1{font-size:2.1rem}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <img class="logo" src="logo.svg" alt="Qiniso logo">
+    <h1>veridigit</h1>
+    <p class="tag">Verified identifier validation for AI agents — checksums, not guesses.</p>
+    <p class="by">by <a href="https://github.com/qinisolabs">Qiniso</a> · verified, trustworthy data tools for AI agents</p>
+    <div class="cta">
+      <a class="btn primary" href="https://www.npmjs.com/package/veridigit">npm</a>
+      <a class="btn ghost" href="https://github.com/qinisolabs/veridigit">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <p class="lead">LLMs accept malformed IBANs, mistype card check digits, and invent ISBN
+    and VIN check digits — confidently and silently. <strong>veridigit</strong> gives an
+    agent the real checksum algorithms instead, returning a structured result with the
+    parsed parts and clear reasons when something is wrong. It ships as both an MCP server
+    and a typed TypeScript library.</p>
+  </section>
+
+  <section>
+    <h2>The benchmark</h2>
+    <div class="bench">
+      <div class="headline">
+        <div class="stat bad"><div class="num">91%</div><div class="lbl">LLM alone, wrong (no tool)</div></div>
+        <div class="stat good"><div class="num">0%</div><div class="lbl">LLM + veridigit, wrong</div></div>
+      </div>
+      <table>
+        <thead><tr><th>Identifier</th><th>LLM-alone error</th><th></th><th class="r">veridigit</th></tr></thead>
+        <tbody>
+          <tr><td>IBAN (mod-97 check digits)</td><td class="r">100%</td><td><div class="bar"><span style="width:100%"></span></div></td><td class="r">0%</td></tr>
+          <tr><td>VIN (ISO 3779 check digit)</td><td class="r">100%</td><td><div class="bar"><span style="width:100%"></span></div></td><td class="r">0%</td></tr>
+          <tr><td>ISBN-13 (mod-10 check digit)</td><td class="r">88%</td><td><div class="bar"><span style="width:88%"></span></div></td><td class="r">0%</td></tr>
+          <tr><td>Payment card (Luhn check digit)</td><td class="r">75%</td><td><div class="bar"><span style="width:75%"></span></div></td><td class="r">0%</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Method: 32 check-digit questions on randomly generated, non-memorised
+      identifiers, asked of a frontier model with no tools, scored against the algorithmic
+      answer. veridigit is deterministic, so it is correct by construction. Single-model,
+      cold (no tool) baseline — a broader multi-model run is in progress. Reproduce it from
+      the eval harness in the repo.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Use it</h2>
+    <p class="lead">As an MCP server, in your client config:</p>
+<pre>{
+  "mcpServers": {
+    "veridigit": { "command": "npx", "args": ["-y", "veridigit"] }
+  }
+}</pre>
+    <p class="lead">As a TypeScript library:</p>
+<pre>npm install veridigit
+
+import { validateIban, validateCard } from "veridigit";
+
+validateIban("GB82 WEST 1234 5698 7654 32");
+// { valid: true, country: "United Kingdom", checkDigits: "82", ... }
+
+validateCard("4111 1111 1111 1111");
+// { valid: true, luhnValid: true, brand: "Visa", ... }</pre>
+  </section>
+
+  <section>
+    <h2>Tools</h2>
+    <div class="grid">
+      <div class="tool"><code>validate_iban</code><p>ISO 7064 mod-97 checksum and country-specific length, 75+ countries.</p></div>
+      <div class="tool"><code>validate_card</code><p>Luhn checksum, brand from BIN (Visa, Mastercard, Amex, Discover, Diners, JCB, UnionPay), length rules.</p></div>
+      <div class="tool"><code>validate_isbn</code><p>ISBN-13: 978/979 prefix and the mod-10 weighted check digit.</p></div>
+      <div class="tool"><code>validate_vin</code><p>ISO 3779 alphabet (no I/O/Q) and the position-9 transliteration check digit.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Scope</h2>
+    <p class="lead">veridigit validates the <strong>structure</strong> of an identifier — its
+    format and checksum. It does <strong>not</strong> confirm that a bank account, card,
+    book or vehicle actually exists, is active, or belongs to anyone, and it makes no
+    network calls.</p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    Apache-2.0 · <a href="https://github.com/qinisolabs/veridigit">github.com/qinisolabs/veridigit</a> ·
+    <a href="https://github.com/qinisolabs">Qiniso</a>
+  </div>
+</footer>
+</body>
+</html>

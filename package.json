@@ -1,0 +1,45 @@
+{
+  "name": "veridigit",
+  "version": "0.1.0",
+  "mcpName": "io.github.qinisolabs/veridigit",
+  "description": "Verified IBAN, card, ISBN-13 & VIN validation for AI agents — checksums, not guesses.",
+  "license": "Apache-2.0",
+  "author": "Qiniso",
+  "homepage": "https://github.com/qinisolabs/veridigit#readme",
+  "repository": { "type": "git", "url": "git+https://github.com/qinisolabs/veridigit.git" },
+  "bugs": { "url": "https://github.com/qinisolabs/veridigit/issues" },
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "bin": { "veridigit-mcp": "dist/server.js" },
+  "files": ["dist", "data", "README.md", "LICENSE"],
+  "engines": { "node": ">=18" },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "agents",
+    "llm",
+    "iban",
+    "luhn",
+    "credit-card",
+    "isbn",
+    "vin",
+    "checksum",
+    "validation"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test": "tsx test/parity.test.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "tsx": "^4.16.0",
+    "@types/node": "^20.14.0"
+  }
+}
