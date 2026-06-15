@@ -20,10 +20,16 @@ Supported in v1:
 
 ## Why
 
-A quick eval of a frontier model with no tools, on arbitrary (non-memorised) identifiers,
-gets check-digit questions wrong a large fraction of the time — and silently. The failure
-is invisible: the model returns a confident, well-formatted answer that happens to be
-wrong. `veridigit` replaces the guess with the algorithm.
+On 32 randomly generated, non-memorised identifiers, a frontier model with no tool got the
+check digit **wrong 91% of the time** — IBAN 100%, VIN 100%, ISBN-13 88%, card/Luhn 75% —
+versus **0%** for `veridigit`. The failure is invisible: the model returns a confident,
+well-formatted answer that happens to be wrong. `veridigit` replaces the guess with the
+algorithm.
+
+Benchmark and reproducible harness: **https://qinisolabs.github.io/veridigit**
+
+> The 91% figure is a single-model, cold (no-tool) baseline; a broader multi-model run is
+> in progress.
 
 ## Use as an MCP server
 
