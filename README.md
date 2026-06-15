@@ -28,8 +28,8 @@ algorithm.
 
 Benchmark and reproducible harness: **https://qinisolabs.github.io/veridigit**
 
-> The 91% figure is a single-model, cold (no-tool) baseline; a broader multi-model run is
-> in progress.
+> The 91% figure is one frontier model, tool-free, at temperature 0. Run it on any model
+> yourself with the harness in [`bench/`](bench/).
 
 ## Use as an MCP server
 

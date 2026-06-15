@@ -50,7 +50,12 @@ Repo → Settings → Pages → Deploy from branch → `main` / `/docs` → Save
 Live at https://qinisolabs.github.io/veridigit (favicon + logo already wired).
 
 ## Step 11 — Directories
-- **Glama** (glama.ai): "Add MCP Server → Server" form. Free — do NOT enter billing.
+- **Glama** (glama.ai): "Add MCP Server" → **Server** tab (not Connector). Free — do NOT
+  enter billing on later screens.
+  - Name: `veridigit`
+  - Description: `Verified validation of structured identifiers — IBAN, payment cards, ISBN-13 and VIN — for AI agents. Runs the real checksum algorithms (mod-97, Luhn, mod-10, ISO 3779) instead of letting the model guess, and returns structured results with clear errors.`
+  - GitHub Repository URL: `https://github.com/qinisolabs/veridigit`
+  - Submit for Review (submissions are reviewed before going public).
 - **mcp.so**: submit the server.
 - **awesome-mcp-servers** (punkpeye): PR adding, in the best category:
   `- [qinisolabs/veridigit](https://github.com/qinisolabs/veridigit) 📇 🏠 - Verified IBAN, card, ISBN-13 & VIN validation — checksums, not guesses.`
